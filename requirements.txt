@@ -1,0 +1,5 @@
+attrs==24.2.0
+construct==2.10.70
+inflection==0.5.1
+pytz==2024.2
+regipy==5.0.0
