@@ -1,4 +1,3 @@
-from regipy.registry import RegistryHive
 import datetime
 
 
