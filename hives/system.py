@@ -1,9 +1,10 @@
+from hive import Hive
 import datetime
 
 
-class SystemHive:
+class SystemHive(Hive):
     def __init__(self, reg_hive):
-        self.reg_hive = reg_hive
+        super().__init__(reg_hive)
         self.get_current_control_set()
     
     def get_current_control_set(self):
