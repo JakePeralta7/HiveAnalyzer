@@ -1,10 +1,11 @@
+
+# Internal Imports
 from hive import Hive
-import datetime
 
 
 class SystemHive(Hive):
-    def __init__(self, reg_hive):
-        super().__init__(reg_hive)
+    def __init__(self, reg_hive, output):
+        super().__init__(reg_hive, output)
         self.get_current_control_set()
     
     def get_current_control_set(self):
@@ -21,15 +22,29 @@ class SystemHive(Hive):
                 raise Exception("Couldn't find the current control set")
 
     def get_computer_name(self):
-        return self.reg_hive.get_key(fr"\{self.current_control_set}\Control\ComputerName\ComputerName").get_value("ComputerName")
+        reg_key = fr"\{self.current_control_set}\Control\ComputerName\ComputerName"
+        reg_value_name = "ComputerName"
+
+        timestamp_description = "Last Change Time"
+        category = "General Info"
+        description = "Computer Name"
+        computer_name, last_modified = self.get_value_data(reg_key, reg_value_name)
+
+        self.output.file_evidence(timestamp=last_modified, timestamp_description=timestamp_description,
+                                  source=None, category=category, registry_path=None, description=description,
+                                  finding=computer_name)
 
     def get_last_shutdown(self):
-        shutdown_time_hex_bytes = self.reg_hive.get_key(fr"\{self.current_control_set}\Control\Windows").get_value("ShutdownTime")
+        reg_key = fr"\{self.current_control_set}\Control\Windows"
+        reg_value_name = "ShutdownTime"
 
-        # Convert the hex value to a decimal timestamp
-        shutdown_time_decimal = int.from_bytes(shutdown_time_hex_bytes, byteorder='little', signed=False) / 10**7
+        timestamp_description = "Last Shutdown Time"
+        category = "General Info"
+        description = "Last Shutdown Time"
         
-        # Convert the decimal timestamp to a datetime object
-        shutdown_time = datetime.datetime(1601, 1, 1) + datetime.timedelta(seconds=shutdown_time_decimal)
-    
-        return shutdown_time
+        shutdown_time_hex_bytes, _ = self.get_value_data(reg_key, reg_value_name)
+        shutdown_time = self.convert_hex_filetime(shutdown_time_hex_bytes)
+
+        self.output.file_evidence(timestamp=shutdown_time, timestamp_description=timestamp_description,
+                                  source=None, category=category, registry_path=None, description=description,
+                                  finding=shutdown_time)
