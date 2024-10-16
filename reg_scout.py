@@ -25,9 +25,9 @@ def main():
         # Hanldes the SOFTWARE hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SOFTWARE\')
         case "software":
             software_hive = SoftwareHive(reg_hive, output)
-            print(software_hive.get_winlogon_shell())
-            print(software_hive.get_operating_system())
-            print(software_hive.detect_disabled_event_log())
+            software_hive.get_winlogon_shell()
+            software_hive.get_operating_system()
+            software_hive.detect_disabled_event_log()
 
         # Hanldes the SYSTEM hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SYSTEM\')
         case "system":
