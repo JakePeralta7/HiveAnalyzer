@@ -4,8 +4,10 @@ from hive import Hive
 
 
 class SystemHive(Hive):
-    def __init__(self, reg_hive, output):
-        super().__init__(reg_hive, output)
+    def __init__(self, reg_hive_path, reg_hive, output):
+        super().__init__(reg_hive_path, reg_hive, output)
+        self.prefix = r"HKEY_LOCAL_MACHINE\SYSTEM"
+        self.current_control_set = None
         self.get_current_control_set()
     
     def get_current_control_set(self):
@@ -28,11 +30,13 @@ class SystemHive(Hive):
         timestamp_description = "Last Change Time"
         category = "General Info"
         description = "Computer Name"
+        registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
+
         computer_name, last_modified = self.get_value_data(reg_key, reg_value_name)
 
-        self.output.file_evidence(timestamp=last_modified, timestamp_description=timestamp_description,
-                                  source=None, category=category, registry_path=None, description=description,
-                                  finding=computer_name)
+        self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
+                                  finding=computer_name, description=description, registry_path=registry_path,
+                                  source=self.reg_hive_path)
 
     def get_last_shutdown(self):
         reg_key = fr"\{self.current_control_set}\Control\Windows"
@@ -41,10 +45,11 @@ class SystemHive(Hive):
         timestamp_description = "Last Shutdown Time"
         category = "General Info"
         description = "Last Shutdown Time"
+        registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
         
         shutdown_time_hex_bytes, _ = self.get_value_data(reg_key, reg_value_name)
         shutdown_time = self.convert_hex_filetime(shutdown_time_hex_bytes)
 
-        self.output.file_evidence(timestamp=shutdown_time, timestamp_description=timestamp_description,
-                                  source=None, category=category, registry_path=None, description=description,
-                                  finding=shutdown_time)
+        self.output.file_evidence(timestamp=shutdown_time, category=category, timestamp_description=timestamp_description,
+                                  finding=shutdown_time, description=description, registry_path=registry_path,
+                                  source=self.reg_hive_path)
