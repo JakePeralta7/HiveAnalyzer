@@ -15,24 +15,24 @@ from hives.ntuser import NTUserHive
 def handle_registry_hive(reg_hive_path, reg_hive, output):
     match reg_hive.hive_type:
 
-        # Hanldes the SECURITY hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SECURITY\')
+        # Handles the SECURITY hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SECURITY\')
         case "security":
             security_hive = SecurityHive(reg_hive_path, reg_hive, output)
 
-        # Hanldes the SOFTWARE hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SOFTWARE\')
+        # Handles the SOFTWARE hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SOFTWARE\')
         case "software":
             software_hive = SoftwareHive(reg_hive_path, reg_hive, output)
             software_hive.get_winlogon_shell()
             software_hive.get_operating_system()
             software_hive.detect_disabled_event_log()
 
-        # Hanldes the SYSTEM hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SYSTEM\')
+        # Handles the SYSTEM hive (located in the live registry in 'HKEY_LOCAL_MACHINE\SYSTEM\')
         case "system":
             system_hive = SystemHive(reg_hive_path, reg_hive, output)
             system_hive.get_computer_name()
             system_hive.get_last_shutdown()
 
-        # Hanldes the NTUSER.DAT hive (located in the live registry in 'HKEY_CURRENT_USER\' for the appropriate user)
+        # Handles the NTUSER.DAT hive (located in the live registry in 'HKEY_CURRENT_USER\' for the appropriate user)
         case "ntuser":
             ntuser_hive = NTUserHive(reg_hive_path, reg_hive, output)
             ntuser_hive.get_used_sysinternals()
