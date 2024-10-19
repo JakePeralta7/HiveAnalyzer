@@ -17,7 +17,7 @@ class NTUserHive(Hive):
         self.username = self.get_username()
 
     def get_username(self):
-        return Path(self.reg_hive_path).parent.parts[-1]
+        return Path(self.reg_hive.header.file_name).parent.parts[-1]
 
     def is_user_signed_in(self):
         reg_key = r"\Software\Microsoft\Windows\CurrentVersion\Explorer"
