@@ -5,7 +5,7 @@ from regipy.exceptions import RegistryKeyNotFoundException
 from pathlib import Path
 
 # Internal Imports
-from hive import Hive
+from HiveAnalyzer.hive import Hive
 
 
 class NTUserHive(Hive):
