@@ -3,7 +3,7 @@
 from csv import DictWriter
 
 # Internal Imports
-from evidence import Evidence
+from HiveAnalyzer.evidence import Evidence
 
 
 class Output:
