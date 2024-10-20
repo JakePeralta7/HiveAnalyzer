@@ -16,9 +16,11 @@ class SystemHive(Hive):
         
         match current_control_set_value:
             case 1:
-                self.current_control_set = "ControlSet001"
+                current_control_set = "ControlSet001"
+                return current_control_set
             case 2:
-                self.current_control_set = "ControlSet002"
+                current_control_set = "ControlSet002"
+                return current_control_set
             case _:
                 raise Exception("Couldn't find the current control set")
                 return None
