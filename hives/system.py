@@ -7,8 +7,7 @@ class SystemHive(Hive):
     def __init__(self, reg_hive_path, reg_hive, output):
         super().__init__(reg_hive_path, reg_hive, output)
         self.prefix = r"HKEY_LOCAL_MACHINE\SYSTEM"
-        self.current_control_set = None
-        self.get_current_control_set()
+        self.current_control_set = self.get_current_control_set()
     
     def get_current_control_set(self):
         
@@ -22,6 +21,7 @@ class SystemHive(Hive):
                 self.current_control_set = "ControlSet002"
             case _:
                 raise Exception("Couldn't find the current control set")
+                return None
 
     def get_computer_name(self):
         reg_key = fr"\{self.current_control_set}\Control\ComputerName\ComputerName"
