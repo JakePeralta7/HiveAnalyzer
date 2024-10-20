@@ -71,7 +71,3 @@ def main():
                 continue
 
     output.export()
-
-
-if __name__ == "__main__":
-    main()
