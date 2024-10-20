@@ -5,11 +5,11 @@ from construct.core import ConstError
 from os import walk
 
 # Internals Imports
-from output import Output
-from hives.security import SecurityHive
-from hives.software import SoftwareHive
-from hives.system import SystemHive
-from hives.ntuser import NTUserHive
+from HiveAnalyzer.output import Output
+from HiveAnalyzer.hives.security import SecurityHive
+from HiveAnalyzer.hives.software import SoftwareHive
+from HiveAnalyzer.hives.system import SystemHive
+from HiveAnalyzer.hives.ntuser import NTUserHive
 
 
 def handle_registry_hive(reg_hive_path, reg_hive, output):
