@@ -1,6 +1,6 @@
 
 # Internal Imports
-from hive import Hive
+from HiveAnalyzer.hive import Hive
 
 
 class SystemHive(Hive):
