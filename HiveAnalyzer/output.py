@@ -1,9 +1,13 @@
 
 # External Imports
 from csv import DictWriter
+import logging
 
 # Internal Imports
 from HiveAnalyzer.evidence import Evidence
+
+
+logger = logging.getLogger(__name__)
 
 
 class Output:

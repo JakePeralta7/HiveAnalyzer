@@ -3,9 +3,13 @@
 from regipy import convert_wintime
 from regipy.exceptions import RegistryKeyNotFoundException
 from pathlib import Path
+import logging
 
 # Internal Imports
 from HiveAnalyzer.hive import Hive
+
+
+logger = logging.getLogger(__name__)
 
 
 class NTUserHive(Hive):

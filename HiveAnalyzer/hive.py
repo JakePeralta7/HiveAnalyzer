@@ -1,6 +1,11 @@
 
 # External Imports
 from datetime import datetime, timedelta
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 class Hive:
     def __init__(self, reg_hive_path, reg_hive, output):

@@ -1,3 +1,11 @@
+
+# External Imports
+import logging
+
+
+logger = logging.getLogger(__name__)
+
+
 class Evidence:
     def __init__(self, timestamp, category, timestamp_description, description, finding, registry_path, source):
 

@@ -3,6 +3,7 @@
 from regipy.registry import RegistryHive
 from construct.core import ConstError
 from os import walk
+import logging
 
 # Internals Imports
 from HiveAnalyzer.output import Output
@@ -10,6 +11,9 @@ from HiveAnalyzer.hives.security import SecurityHive
 from HiveAnalyzer.hives.software import SoftwareHive
 from HiveAnalyzer.hives.system import SystemHive
 from HiveAnalyzer.hives.ntuser import NTUserHive
+
+
+logger = logging.getLogger(__name__)
 
 
 def handle_registry_hive(reg_hive_path, reg_hive, output):
@@ -58,6 +62,8 @@ def handle_registry_hive(reg_hive_path, reg_hive, output):
 
 def main():
 
+    logging.basicConfig(filename='test.log', level=logging.INFO)
+    
     output = Output(output_format="csv", output_path="zibi.csv")
 
     artifacts_dir = r"C:\Users\flare\Documents\output"

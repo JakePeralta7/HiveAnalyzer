@@ -1,6 +1,12 @@
 
+# External Imports
+import logging
+
 # Internal Imports
 from HiveAnalyzer.hive import Hive
+
+
+logger = logging.getLogger(__name__)
 
 
 class SoftwareHive(Hive):
