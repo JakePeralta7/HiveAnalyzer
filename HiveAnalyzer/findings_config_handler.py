@@ -63,84 +63,84 @@ class FindingsConfigHandler:
 
                     # Parse category
                     try:
-                        category = finding["category"]
+                        category : str = finding["category"]
                     except KeyError:
                         try:
-                            category = configuration["category"]
+                            category : str = configuration["category"]
                         except KeyError:
                             raise Exception("category is a mandatory attribute")
 
                     # Parse description
                     try:
-                        description = finding["description"]
+                        description : str = finding["description"]
                     except KeyError:
                         try:
-                            description = configuration["description"]
+                            description : str = configuration["description"]
                         except KeyError:
                             raise Exception("description is a mandatory attribute")
 
                     # Parse timestamp description
                     try:
-                        timestamp_desc = finding["timestamp_desc"]
+                        timestamp_desc : str = finding["timestamp_desc"]
                     except KeyError:
                         try:
-                            timestamp_desc = configuration["timestamp_desc"]
+                            timestamp_desc : str = configuration["timestamp_desc"]
                         except KeyError:
                             raise Exception("timestamp_desc is a mandatory attribute")
 
                     # Parse registry key path
                     try:
-                        registry_key_path = finding["registry_key_path"]
+                        registry_key_path : str = finding["registry_key_path"]
                     except KeyError:
                         try:
-                            registry_key_path = configuration["registry_key_path"]
+                            registry_key_path : str = configuration["registry_key_path"]
                         except KeyError:
                             raise Exception("registry_key_path is a mandatory attribute")
 
                     # Parse registry value name
                     try:
-                        registry_value_name = finding["registry_value_name"]
+                        registry_value_name : str = finding["registry_value_name"]
                     except KeyError:
                         try:
-                            registry_value_name = configuration["registry_value_name"]
+                            registry_value_name : str = configuration["registry_value_name"]
                         except KeyError:
                             raise Exception("registry_value_name is a mandatory attribute")
 
                     # Parse registry value data
                     try:
-                        registry_value_data = finding["registry_value_data"]
+                        registry_value_data : str = finding["registry_value_data"]
                     except KeyError:
                         try:
-                            registry_value_data = configuration["registry_value_data"]
+                            registry_value_data : str = configuration["registry_value_data"]
                         except KeyError:
                             registry_value_data = None
 
                     # Parse timestamp from key last modified
                     try:
-                        timestamp_from_key_last_modified = finding["timestamp_from_key_last_modified"]
+                        timestamp_from_key_last_modified : bool = finding["timestamp_from_key_last_modified"]
                     except KeyError:
                         try:
-                            timestamp_from_key_last_modified = configuration["timestamp_from_key_last_modified"]
+                            timestamp_from_key_last_modified : bool = configuration["timestamp_from_key_last_modified"]
                         except KeyError:
-                            timestamp_from_key_last_modified = False
+                            timestamp_from_key_last_modified : bool = False
 
                     # Parse timestamp from value decimal
                     try:
-                        timestamp_from_value_decimal = finding["timestamp_from_value_decimal"]
+                        timestamp_from_value_decimal : bool = finding["timestamp_from_value_decimal"]
                     except KeyError:
                         try:
-                            timestamp_from_value_decimal = configuration["timestamp_from_value_decimal"]
+                            timestamp_from_value_decimal : bool = configuration["timestamp_from_value_decimal"]
                         except KeyError:
-                            timestamp_from_value_decimal = False
+                            timestamp_from_value_decimal : bool = False
 
                     # Parse timestamp from value hex
                     try:
                         timestamp_from_value_hex : bool = finding["timestamp_from_value_hex"]
                     except KeyError:
                         try:
-                            timestamp_from_value_hex = configuration["timestamp_from_value_hex"]
+                            timestamp_from_value_hex : bool = configuration["timestamp_from_value_hex"]
                         except KeyError:
-                            timestamp_from_value_hex = False
+                            timestamp_from_value_hex : bool = False
 
                     if not (timestamp_from_key_last_modified or timestamp_from_value_decimal or timestamp_from_value_hex):
                         raise Exception(
