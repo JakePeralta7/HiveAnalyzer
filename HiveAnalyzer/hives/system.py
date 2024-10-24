@@ -18,7 +18,9 @@ class SystemHive(Hive):
     def get_current_control_set(self):
         
         # We can determine what is the CurrentControlSet based on 'HKEY_LOCAL_MACHINE\SYSTEM\Select\Current'
-        current_control_set_value = self.reg_hive.get_key(r"\Select").get_value("Current")
+        reg_key = r"\Select"
+        reg_value_name = "Current"
+        current_control_set_value, _ = self.get_value_data(reg_key, reg_value_name)
         
         match current_control_set_value:
             case 1:
