@@ -42,7 +42,7 @@ class FindingsConfigHandler:
 
                 # Uses pyyaml's safe_load to parse the yaml format to dictionary
                 current_configuration = safe_load(current_configuration_file_data)
-                test = self.parse_configuration(current_configuration)
+                self.parse_configuration(current_configuration)
 
     def parse_configuration(self, configuration):
         if type(configuration["findings"]) == list:
