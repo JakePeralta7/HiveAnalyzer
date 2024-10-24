@@ -11,6 +11,7 @@ from HiveAnalyzer.hives.security import SecurityHive
 from HiveAnalyzer.hives.software import SoftwareHive
 from HiveAnalyzer.hives.system import SystemHive
 from HiveAnalyzer.hives.ntuser import NTUserHive
+from HiveAnalyzer.findings_config_handler import FindingsConfigHandler
 
 
 logger = logging.getLogger(__name__)
@@ -61,6 +62,7 @@ def handle_registry_hive(reg_hive_path, reg_hive, output):
 
 
 def main():
+    a = FindingsConfigHandler()
 
     logging.basicConfig(filename='test.log', level=logging.INFO)
     
