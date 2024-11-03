@@ -19,7 +19,7 @@ class SoftwareHive(Hive):
         reg_key = r"\Microsoft\Windows NT\CurrentVersion\Winlogon"
         reg_value_name = "Shell"
 
-        timestamp_description = "Last Key Change Time"
+        timestamp_desc = "Last Registry Key Change"
         category = "Detection Signature"
         description = r"Winlogon\Shell was Replaced"
         registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
@@ -27,7 +27,7 @@ class SoftwareHive(Hive):
         shell_executable, last_modified = self.get_value_data(reg_key, reg_value_name)
 
         if shell_executable != "explorer.exe":
-            self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
+            self.output.file_evidence(timestamp=last_modified, category=category, timestamp_desc=timestamp_desc,
                                   finding=shell_executable, description=description, registry_path=registry_path,
                                   source=self.reg_hive_path)
 
@@ -35,7 +35,7 @@ class SoftwareHive(Hive):
         reg_key = r"\Microsoft\Windows\CurrentVersion\WINEVT\Channels"
         reg_value_name = "Enabled"
 
-        timestamp_description = "Last Time Key Modified"
+        timestamp_desc = "Last Registry Key Change"
         category = "Detection Signature"
         description = "Disabled Important Event Logs"
 
@@ -49,7 +49,7 @@ class SoftwareHive(Hive):
             event_log_status, last_modified = self.get_value_data(current_reg_key, reg_value_name)
             if event_log_status == 0:
                 registry_path = fr"{self.prefix}{current_reg_key}\{reg_value_name}"
-                self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
+                self.output.file_evidence(timestamp=last_modified, category=category, timestamp_desc=timestamp_desc,
                                   finding=event_log_name, description=description, registry_path=registry_path,
                                   source=self.reg_hive_path)
             
