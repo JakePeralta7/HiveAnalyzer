@@ -13,12 +13,13 @@ logger = logging.getLogger(__name__)
 
 
 class NTUserHive(Hive):
-    def __init__(self, reg_hive_path, reg_hive, output):
-        super().__init__(reg_hive_path, reg_hive, output)
+    def __init__(self, reg_hive_path, reg_hive, output, findings_config):
+        super().__init__(reg_hive_path, reg_hive, output, findings_config)
         self.prefix = "HKEY_CURRENT_USER"
 
         # The Username is always the name of the directory in which NTUSER.DAT is stored
         self.username = self.get_username()
+        self.get_configurable()
 
     def get_username(self):
         return Path(self.reg_hive.header.file_name).parent.parts[-1]
