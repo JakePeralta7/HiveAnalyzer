@@ -159,5 +159,4 @@ class FindingsConfigHandler:
                         "timestamp_from_value_decimal": timestamp_from_value_decimal,
                         "timestamp_from_value_hex": timestamp_from_value_hex
                     }
-                    print(finding_config)
                     self.finding_configs[hive_type].append(finding_config)
