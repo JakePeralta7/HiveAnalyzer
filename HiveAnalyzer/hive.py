@@ -8,10 +8,33 @@ logger = logging.getLogger(__name__)
 
 
 class Hive:
-    def __init__(self, reg_hive_path, reg_hive, output):
+    def __init__(self, reg_hive_path, reg_hive, output, findings_config=None):
         self.reg_hive_path = reg_hive_path
         self.reg_hive = reg_hive
         self.output = output
+        self.findings_config = findings_config
+        
+    def get_configurable(self):
+        for finding_config in self.findings_config:
+            if self.reg_hive.hive_type == "system" and finding_config["registry_key_path"].startswith(r"\CurrentControlSet"):
+                finding_config["registry_key_path"] = finding_config["registry_key_path"].replace("CurrentControlSet", self.current_control_set)
+            
+            registry_path = fr"{self.prefix}{finding_config["registry_key_path"]}\{finding_config["registry_value_name"]}"
+            registry_value_data, last_modified = self.get_value_data(finding_config["registry_key_path"], finding_config["registry_value_name"])
+            
+            if finding_config["timestamp_from_key_last_modified"]:
+                timestamp = last_modified
+            elif finding_config["timestamp_from_value_hex"]:
+                timestamp = self.convert_hex_filetime(registry_value_data)
+                registry_value_data = timestamp
+                
+            elif finding_config["timestamp_from_value_decimal"]:
+                timestamp = self.convert_decimal_filetime(registry_value_data)
+                registry_value_data = timestamp
+            
+            self.output.file_evidence(timestamp=timestamp, category=finding_config["category"], timestamp_description=finding_config["timestamp_desc"],
+                                  finding=registry_value_data, description=finding_config["description"], registry_path=registry_path,
+                                  source=self.reg_hive_path)
 
     def get_value_data(self, reg_key, reg_value_name):
         reg_key_obj = self.reg_hive.get_key(reg_key)
