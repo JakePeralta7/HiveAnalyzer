@@ -32,7 +32,7 @@ class Hive:
                 timestamp = self.convert_decimal_filetime(registry_value_data)
                 registry_value_data = timestamp
             
-            self.output.file_evidence(timestamp=timestamp, category=finding_config["category"], timestamp_description=finding_config["timestamp_desc"],
+            self.output.file_evidence(timestamp=timestamp, category=finding_config["category"], timestamp_desc=finding_config["timestamp_desc"],
                                   finding=registry_value_data, description=finding_config["description"], registry_path=registry_path,
                                   source=self.reg_hive_path)
 
