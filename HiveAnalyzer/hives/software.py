@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 
 
 class SoftwareHive(Hive):
-    def __init__(self, reg_hive_path, reg_hive, output):
-        super().__init__(reg_hive_path, reg_hive, output)
+    def __init__(self, reg_hive_path, reg_hive, output, findings_config):
+        super().__init__(reg_hive_path, reg_hive, output, findings_config)
         self.prefix = r"HKEY_LOCAL_MACHINE\SOFTWARE"
+        self.get_configurable()
 
     def get_winlogon_shell(self):
         reg_key = r"\Microsoft\Windows NT\CurrentVersion\Winlogon"
@@ -28,21 +29,6 @@ class SoftwareHive(Hive):
         if shell_executable != "explorer.exe":
             self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
                                   finding=shell_executable, description=description, registry_path=registry_path,
-                                  source=self.reg_hive_path)
-
-    def get_operating_system(self):
-        reg_key = r"\Microsoft\Windows NT\CurrentVersion"
-        reg_value_name = "ProductName"
-
-        timestamp_description = "Last Key Change Time"
-        category = "General Info"
-        description = r"Operating System"
-        registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
-
-        operating_system, last_modified = self.get_value_data(reg_key, reg_value_name)
-
-        self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
-                                  finding=operating_system, description=description, registry_path=registry_path,
                                   source=self.reg_hive_path)
 
     def detect_disabled_event_log(self):
