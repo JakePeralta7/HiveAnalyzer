@@ -51,10 +51,10 @@ class FindingsConfigHandler:
 
                     # Parse hive type
                     try:
-                        hive_type = finding["hive_type"]
+                        hive_type = lower(finding["hive_type"])
                     except KeyError:
                         try:
-                            hive_type = configuration["hive_type"]
+                            hive_type = lower(configuration["hive_type"])
                         except KeyError:
                             raise Exception("hive_type is a mandatory attribute")
 
