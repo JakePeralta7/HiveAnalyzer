@@ -1,5 +1,12 @@
 category: System Info
 findings:
+  - description: Computer Name
+    timestamp_desc: Last Change Time
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\ComputerName\ComputerName
+    registry_value_name: ComputerName
+    timestamp_from_key_last_modified: yes
+
   - description: OS Name
     timestamp_desc: Last Key Change Time
     hive_type: Software
