@@ -32,19 +32,3 @@ class SystemHive(Hive):
                 raise Exception("Couldn't find the current control set")
                 current_control_set = None
         return current_control_set
-
-    def get_last_shutdown(self):
-        reg_key = fr"\{self.current_control_set}\Control\Windows"
-        reg_value_name = "ShutdownTime"
-
-        timestamp_description = "Last Shutdown Time"
-        category = "General Info"
-        description = "Last Shutdown Time"
-        registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
-        
-        shutdown_time_hex_bytes, _ = self.get_value_data(reg_key, reg_value_name)
-        shutdown_time = self.convert_hex_filetime(shutdown_time_hex_bytes)
-
-        self.output.file_evidence(timestamp=shutdown_time, category=category, timestamp_description=timestamp_description,
-                                  finding=shutdown_time, description=description, registry_path=registry_path,
-                                  source=self.reg_hive_path)
