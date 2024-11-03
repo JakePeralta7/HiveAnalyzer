@@ -16,15 +16,15 @@ class Output:
         self.output_path = output_path
         self.evidence_list = []
 
-    def file_evidence(self, timestamp, category, timestamp_description, description, finding, registry_path, source):
-        evidence = Evidence(timestamp, category, timestamp_description, description, finding, registry_path, source)
+    def file_evidence(self, timestamp, category, timestamp_desc, description, finding, registry_path, source):
+        evidence = Evidence(timestamp, category, timestamp_desc, description, finding, registry_path, source)
         self.evidence_list.append(evidence)
     
     def export(self):
         match self.output_format:
             case "csv":
                 with open(self.output_path, 'w', newline='') as csvfile:
-                    fieldnames = ["timestamp", "category", "timestamp_description", "description", "finding", "registry_path",
+                    fieldnames = ["timestamp", "category", "timestamp_desc", "description", "finding", "registry_path",
                                   "source"]
                     writer = DictWriter(csvfile, fieldnames=fieldnames)
                     writer.writeheader()
