@@ -47,7 +47,7 @@ class NTUserHive(Hive):
     def get_used_sysinternals(self):
         reg_key =r"\Software\Sysinternals"
 
-        timestamp_description = "First Used"
+        timestamp_desc = "First Used"
         category = "Evidence of Execution"
         description = f"{self.username} accepted the EULA of a Sysinternals program"
 
@@ -60,7 +60,7 @@ class NTUserHive(Hive):
                 last_modified = self.convert_decimal_filetime(subkey.header.last_modified)
 
                 self.output.file_evidence(timestamp=last_modified, category=category,
-                                          timestamp_description=timestamp_description, description=description,
+                                          timestamp_desc=timestamp_desc, description=description,
                                           finding=program_name, registry_path=registry_path, source=self.reg_hive_path)
         except RegistryKeyNotFoundException:
             pass
