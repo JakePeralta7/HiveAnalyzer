@@ -19,4 +19,4 @@ findings:
     hive_type: NTUser
     registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     registry_value_name: TaskbarStateLastRun
-    timestamp_from_key_last_modified: yes
+    timestamp_from_value_hex: yes
