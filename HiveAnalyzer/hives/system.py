@@ -10,10 +10,11 @@ logger = logging.getLogger(__name__)
 
 
 class SystemHive(Hive):
-    def __init__(self, reg_hive_path, reg_hive, output):
-        super().__init__(reg_hive_path, reg_hive, output)
+    def __init__(self, reg_hive_path, reg_hive, output, current_findings_config):
+        super().__init__(reg_hive_path, reg_hive, output, current_findings_config)
         self.prefix = r"HKEY_LOCAL_MACHINE\SYSTEM"
         self.current_control_set = self.get_current_control_set()
+        self.get_configurable()
     
     def get_current_control_set(self):
         
@@ -31,21 +32,6 @@ class SystemHive(Hive):
                 raise Exception("Couldn't find the current control set")
                 current_control_set = None
         return current_control_set
-
-    def get_computer_name(self):
-        reg_key = fr"\{self.current_control_set}\Control\ComputerName\ComputerName"
-        reg_value_name = "ComputerName"
-
-        timestamp_description = "Last Change Time"
-        category = "General Info"
-        description = "Computer Name"
-        registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
-
-        computer_name, last_modified = self.get_value_data(reg_key, reg_value_name)
-
-        self.output.file_evidence(timestamp=last_modified, category=category, timestamp_description=timestamp_description,
-                                  finding=computer_name, description=description, registry_path=registry_path,
-                                  source=self.reg_hive_path)
 
     def get_last_shutdown(self):
         reg_key = fr"\{self.current_control_set}\Control\Windows"
