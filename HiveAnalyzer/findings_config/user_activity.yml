@@ -1,0 +1,22 @@
+category: User Activity
+findings:
+  - description: Last Logon Time
+    timestamp_desc: Last Logon
+    hive_type: NTUser
+    registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\2
+    registry_value_name: LastLogonTime
+    timestamp_from_value_hex: yes
+  
+  - description: Logon Count
+    timestamp_desc: Last Registry Key Change
+    hive_type: NTUser
+    registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer
+    registry_value_name: LogonCount
+    timestamp_from_key_last_modified: yes
+
+  - description: Is User Signed-in
+    timestamp_desc: Last Registry Key Change
+    hive_type: NTUser
+    registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer
+    registry_value_name: UserSignedIn
+    timestamp_from_key_last_modified: yes
