@@ -1,5 +1,26 @@
 category: User Activity
 findings:
+  - description: Last Logged-in User's Display name
+    timestamp_desc: Last Registry Key Change
+    hive_type: Software
+    registry_key_path: \Microsoft\Windows\CurrentVersion\Authentication\LogonUI
+    registry_value_name: LastLoggedOnDisplayName
+    timestamp_from_key_last_modified: yes
+
+  - description: Last Logged-in Username
+    timestamp_desc: Last Registry Key Change
+    hive_type: Software
+    registry_key_path: \Microsoft\Windows\CurrentVersion\Authentication\LogonUI
+    registry_value_name: LastLoggedOnSAMUser
+    timestamp_from_key_last_modified: yes
+
+  - description: Last Logged-in User's SID
+    timestamp_desc: Last Registry Key Change
+    hive_type: Software
+    registry_key_path: \Microsoft\Windows\CurrentVersion\Authentication\LogonUI
+    registry_value_name: LastLoggedOnUserSID
+    timestamp_from_key_last_modified: yes
+
   - description: Logon Count
     timestamp_desc: Last Registry Key Change
     hive_type: NTUser
