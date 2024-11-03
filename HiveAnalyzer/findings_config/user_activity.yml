@@ -13,3 +13,10 @@ findings:
     registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer
     registry_value_name: UserSignedIn
     timestamp_from_key_last_modified: yes
+  
+  - description: Taskbar State Last Run Time
+    timestamp_desc: Taskbar State Last Run
+    hive_type: NTUser
+    registry_key_path: \Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    registry_value_name: TaskbarStateLastRun
+    timestamp_from_key_last_modified: yes
