@@ -1,43 +1,50 @@
 category: System Info
 findings:
   - description: Computer Name
-    timestamp_desc: Last Change Time
+    timestamp_desc: Last Changed
     hive_type: System
     registry_key_path: \CurrentControlSet\Control\ComputerName\ComputerName
     registry_value_name: ComputerName
     timestamp_from_key_last_modified: yes
 
   - description: OS Name
-    timestamp_desc: Last Key Change Time
+    timestamp_desc: Last Registry Key Change
     hive_type: Software
     registry_key_path: \Microsoft\Windows NT\CurrentVersion
     registry_value_name: ProductName
     timestamp_from_key_last_modified: yes
     
   - description: OS Type
-    timestamp_desc: Last Key Change Time
+    timestamp_desc: Last Registry Key Change
     hive_type: Software
     registry_key_path: \Microsoft\Windows NT\CurrentVersion
     registry_value_name: InstallationType
     timestamp_from_key_last_modified: yes
     
   - description: OS Version
-    timestamp_desc: Last Key Change Time
+    timestamp_desc: Last Registry Key Change
     hive_type: Software
     registry_key_path: \Microsoft\Windows NT\CurrentVersion
     registry_value_name: DisplayVersion
     timestamp_from_key_last_modified: yes
   
   - description: OS Build
-    timestamp_desc: Last Key Change Time
+    timestamp_desc: Last Registry Key Change
     hive_type: Software
     registry_key_path: \Microsoft\Windows NT\CurrentVersion
     registry_value_name: CurrentBuild
     timestamp_from_key_last_modified: yes
   
   - description: System Root
-    timestamp_desc: Last Key Change Time
+    timestamp_desc: Last Registry Key Change
     hive_type: Software
     registry_key_path: \Microsoft\Windows NT\CurrentVersion
     registry_value_name: SystemRoot
     timestamp_from_key_last_modified: yes
+
+  - description: Last Shutdown Time
+    timestamp_desc: Last Shutdown
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\Windows
+    registry_value_name: ShutdownTime
+    timestamp_from_value_hex: yes
