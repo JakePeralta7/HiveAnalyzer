@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class Evidence:
-    def __init__(self, timestamp, category, timestamp_description, description, finding, registry_path, source):
+    def __init__(self, timestamp, category, timestamp_desc, description, finding, registry_path, source):
 
         # The timestamp that's relevant for the evidence
         self.timestamp = timestamp
@@ -16,7 +16,7 @@ class Evidence:
         self.category = category
 
         # Explains what the timestamp stands for (for example: 'First Execution')
-        self.timestamp_description = timestamp_description
+        self.timestamp_desc = timestamp_desc
 
         # Description of the finding (for example: 'Computer Name')
         self.description = description
