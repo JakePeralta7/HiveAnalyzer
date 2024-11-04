@@ -48,3 +48,31 @@ findings:
     registry_key_path: \CurrentControlSet\Control\Windows
     registry_value_name: ShutdownTime
     timestamp_from_value_hex: yes
+
+  - description: Motherboard Manufacturer
+    timestamp_desc: Last Registry Key Change
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\SystemInformation
+    registry_value_name: SystemManufacturer
+    timestamp_from_key_last_modified: yes
+
+  - description: Motherboard Model
+    timestamp_desc: Last Registry Key Change
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\SystemInformation
+    registry_value_name: SystemProductName
+    timestamp_from_key_last_modified: yes
+
+  - description: BIOS Release Date
+    timestamp_desc: Last Registry Key Change
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\SystemInformation
+    registry_value_name: BIOSReleaseDate
+    timestamp_from_key_last_modified: yes
+
+  - description: BIOS Version
+    timestamp_desc: Last Registry Key Change
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\SystemInformation
+    registry_value_name: BIOSVersion
+    timestamp_from_key_last_modified: yes
