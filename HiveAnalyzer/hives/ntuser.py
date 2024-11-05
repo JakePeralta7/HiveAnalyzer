@@ -19,7 +19,9 @@ class NTUserHive(Hive):
 
         # The Username is always the name of the directory in which NTUSER.DAT is stored
         self.username = self.get_username()
+
         self.get_configurable()
+        self.get_used_sysinternals()
 
     def get_username(self):
         return Path(self.reg_hive.header.file_name).parent.parts[-1]
