@@ -17,6 +17,7 @@ class SystemHive(Hive):
         self.get_configurable()
     
     def get_current_control_set(self):
+        logger.info("Trying to figure out the current control set")
         
         # We can determine what is the CurrentControlSet based on 'HKEY_LOCAL_MACHINE\SYSTEM\Select\Current'
         reg_key = r"\Select"
@@ -29,6 +30,7 @@ class SystemHive(Hive):
             case 2:
                 current_control_set = "ControlSet002"
             case _:
-                raise Exception("Couldn't find the current control set")
+                logger.error("Couldn't find the current control set")
                 current_control_set = None
+        logger.info(f"CurrentControlSet is {current_control_set}")
         return current_control_set
