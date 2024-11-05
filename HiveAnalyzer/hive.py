@@ -1,5 +1,6 @@
 
 # External Imports
+from regipy.exceptions import RegistryKeyNotFoundException, RegistryValueNotFoundException
 from datetime import datetime, timedelta
 import logging
 
@@ -21,6 +22,9 @@ class Hive:
             
             registry_path = fr"{self.prefix}{finding_config["registry_key_path"]}\{finding_config["registry_value_name"]}"
             registry_value_data, last_modified = self.get_value_data(finding_config["registry_key_path"], finding_config["registry_value_name"])
+
+            if registry_value_data is None and last_modified is None:
+                continue
             
             if finding_config["timestamp_from_key_last_modified"]:
                 timestamp = last_modified
@@ -37,12 +41,18 @@ class Hive:
                                   source=self.reg_hive_path)
 
     def get_value_data(self, reg_key, reg_value_name):
-        reg_key_obj = self.reg_hive.get_key(reg_key)
+        try:
+            reg_key_obj = self.reg_hive.get_key(reg_key)
 
-        last_modified = reg_key_obj.header.last_modified
-        reg_last_modified = self.convert_decimal_filetime(last_modified)
-        reg_value_data = reg_key_obj.get_value(reg_value_name)
-        return reg_value_data, reg_last_modified
+            last_modified = reg_key_obj.header.last_modified
+            reg_last_modified = self.convert_decimal_filetime(last_modified)
+            reg_value_data = reg_key_obj.get_value(reg_value_name)
+            return reg_value_data, reg_last_modified
+        except RegistryKeyNotFoundException as e:
+            logger.error(repr(e))
+        except RegistryValueNotFoundException as e:
+            logger.error(repr(e))
+        return None, None
 
     def convert_hex_filetime(self, timestamp_hex_bytes):
         
