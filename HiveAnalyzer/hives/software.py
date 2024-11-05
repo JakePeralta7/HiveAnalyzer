@@ -13,7 +13,10 @@ class SoftwareHive(Hive):
     def __init__(self, reg_hive_path, reg_hive, output, findings_config):
         super().__init__(reg_hive_path, reg_hive, output, findings_config)
         self.prefix = r"HKEY_LOCAL_MACHINE\SOFTWARE"
+
         self.get_configurable()
+        self.get_winlogon_shell()
+        self.detect_disabled_event_log()
 
     def get_winlogon_shell(self):
         reg_key = r"\Microsoft\Windows NT\CurrentVersion\Winlogon"
@@ -25,6 +28,9 @@ class SoftwareHive(Hive):
         registry_path = fr"{self.prefix}{reg_key}\{reg_value_name}"
 
         shell_executable, last_modified = self.get_value_data(reg_key, reg_value_name)
+
+        if shell_executable is None and last_modified is None:
+            return
 
         if shell_executable != "explorer.exe":
             self.output.file_evidence(timestamp=last_modified, category=category, timestamp_desc=timestamp_desc,
@@ -47,6 +53,10 @@ class SoftwareHive(Hive):
         for event_log_name in important_event_logs:
             current_reg_key = fr"{reg_key}\{event_log_name}"
             event_log_status, last_modified = self.get_value_data(current_reg_key, reg_value_name)
+
+            if event_log_status is None and last_modified is None:
+                continue
+
             if event_log_status == 0:
                 registry_path = fr"{self.prefix}{current_reg_key}\{reg_value_name}"
                 self.output.file_evidence(timestamp=last_modified, category=category, timestamp_desc=timestamp_desc,
