@@ -76,10 +76,3 @@ findings:
     registry_key_path: \CurrentControlSet\Control\SystemInformation
     registry_value_name: BIOSVersion
     timestamp_from_key_last_modified: yes
-
-  - description: SecureBoot Setting
-    timestamp_desc: Last Registry Key Change
-    hive_type: System
-    registry_key_path: \CurrentControlSet\Control\Lsa
-    registry_value_name: SecureBoot
-    timestamp_from_key_last_modified: yes
