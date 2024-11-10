@@ -1,0 +1,15 @@
+category: Important Settings
+findings:
+  - description: SecureBoot Enabled
+    timestamp_desc: Last Registry Key Change
+    hive_type: System
+    registry_key_path: \CurrentControlSet\Control\Lsa
+    registry_value_name: SecureBoot
+    timestamp_from_key_last_modified: yes
+
+  - description: UAC Enabled
+    timestamp_desc: Last Registry Key Change
+    hive_type: Software
+    registry_key_path: \Microsoft\Windows\CurrentVersion\Policies\System
+    registry_value_name: EnableLUA
+    timestamp_from_key_last_modified: yes
